@@ -12,6 +12,7 @@ public class Config {
     public final String host;
     public final String user;
     public final String privateKey;
+    public final String remoteHost;
     public final int interval;
 
     public final int localPort;
@@ -26,10 +27,12 @@ public class Config {
         id = null;
 
         host = config.getString("host");
+        remoteHost = config.getString("remoteHost", "localhost");
         user = config.getString("user");
         interval = config.getInt("interval", 5000); // 5 seconds
         privateKey = config.getString("privateKey");
 
+        // Unused
         localPort = 0;
         remotePort = 0;
 
@@ -50,6 +53,7 @@ public class Config {
         var base = "remotes." + id + ".";
 
         host = config.getString(base + "host", globalConfig.host);
+        remoteHost = config.getString(base + "remote-host", globalConfig.remoteHost);
         user = config.getString(base + "user", globalConfig.user);
         String pk = config.getString(base + "private-key", globalConfig.privateKey);
         privateKey = pk == null ? null : McReverseProxy.instance.getDataFolder().toPath().resolve(pk).toFile().getAbsolutePath();
