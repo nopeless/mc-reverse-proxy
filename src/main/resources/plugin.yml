@@ -1,0 +1,8 @@
+name: mc-reverse-proxy
+version: '1.0-SNAPSHOT'
+main: io.github.nopeless.mcReverseProxy.McReverseProxy
+api-version: '1.18'
+load: STARTUP
+commands:
+  mcrp:
+    permission: op

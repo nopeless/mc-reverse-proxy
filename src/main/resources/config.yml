@@ -1,0 +1,14 @@
+# === global values ===
+#host: example.me
+#user: username
+#private-key: /path/to/id_rsa
+#interval: 3000 # 3 seconds
+
+remotes:
+#  remote1:
+#    host: remote-host.com
+#    user: remote-username
+#    private-key: /path/to/remote-private-key.pem
+#    interval: 5000
+#    local-port: 8080
+#    remote-port: 9090
