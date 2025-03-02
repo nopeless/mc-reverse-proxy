@@ -47,7 +47,7 @@ public final class McReverseProxy extends JavaPlugin implements CommandExecutor 
             var errors = remote.getErrors();
             if (!errors.isEmpty()) {
                 for (var error : errors) {
-                    getLogger().warning("Remote " + remote.id + ": " + error);
+                    combinedErrors.add(List.of("[" + remote.id + "] " + error));
                 }
             }
         }
@@ -70,6 +70,7 @@ public final class McReverseProxy extends JavaPlugin implements CommandExecutor 
             getLogger().info(" - User: " + remote.user);
             getLogger().info(" - Local port: " + remote.localPort);
             getLogger().info(" - Remote port: " + remote.remotePort);
+            getLogger().info(" - Remote host: " + remote.remoteHost);
             try {
                 var session = createSession(remote);
                 getLogger().info("[" + remote.id + "] Connected to " + remote.host);
@@ -119,8 +120,10 @@ public final class McReverseProxy extends JavaPlugin implements CommandExecutor 
 
         var session = jsch.getSession(remote.user, remote.host);
         session.setConfig("StrictHostKeyChecking", "no");
+        // security settings
+
         session.connect();
-        session.setPortForwardingR(remote.remotePort, "localhost", remote.localPort);
+        session.setPortForwardingR(remote.remotePort, remote.remoteHost, remote.localPort);
         return session;
     }
 

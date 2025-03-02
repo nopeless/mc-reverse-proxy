@@ -4,6 +4,8 @@
 #private-key: /path/to/id_rsa
 #interval: 3000 # 3 seconds
 
+#remote-host: (do not modify this unless you know what you are doing)
+
 remotes:
 #  remote1:
 #    host: remote-host.com
